@@ -11,7 +11,7 @@ let allSteps = document.getElementsByClassName("allSteps")[0]
 let showAlert = false;
 let showProfile = false;
 
-let current_select;
+let steps_counter = 0;
 
 /*display notification */
 bell.addEventListener("click",()=>{
@@ -48,62 +48,22 @@ profile.addEventListener("click",()=>{
 /* only one step display at a time */
 let detailsOpen= false
 
-
- 
-
-function closeDetails(step){
-    console.log(step)
-    current_select = step;
-    document.querySelectorAll('details').forEach(function(otherDetails) {
-           
-           
-            
-        if (otherDetails !== step) {
-            otherDetails.removeAttribute('open');
-        }  
-        
-    });
-
-}
-
 steps.forEach(function(step) {
     step.addEventListener('click', function() {
         // Close all other details elements when one is opened
         
-        console.log("the step",step)
         document.querySelectorAll('details').forEach(function(otherDetails) {
            
-           
-            if (otherDetails.parentElement.parentElement == current_select){
-            console.log("here",step, current_select)
+           /*  otherDetails.setAttribute("open","true") */
             
             if (otherDetails !== step) {
-                console.log("other details",otherDetails)
                 otherDetails.removeAttribute('open');
-            }  }
+            }  
             
         });
     });
-}); 
+});
 
-/* var closeDetails=()=>{
-    steps.forEach(function(step) 
-        {
-            // Close all other details elements when one is opened
-            
-            document.querySelectorAll('details').forEach(function(otherDetails) {
-               // console.log("i am step",step)
-            
-                
-                    otherDetails.removeAttribute('open');
-                    otherDetails.setAttribute('close' ,'s');
-                    //console.log(otherDetails)
-
-                
-            });
-        
-    });
-} */
 
 /* progress bar indication */
 let completionStatement = document.getElementById("completion-statement")
@@ -113,64 +73,48 @@ let completed=0;
 completionStatement.innerText= `${completed}/5 completed`
 
 
-
-stepSelect.forEach((selection,index)=>{
+stepSelect.forEach((selection)=>{
     let isSelected = false;
-  
+    
     selection.addEventListener("click",()=>{
         isSelected = !isSelected
-       
-     
-         
         if(isSelected){
+            console.log(selection)
             completed+=1
-            
-            
-                if (index<4){
-
-                
-                console.log("lmao")
-                closeDetails(stepSelect[index+1].parentElement.parentElement)
-                stepSelect[index+1].parentElement.parentElement.parentElement.querySelector("details").setAttribute("open","true")
-
-                stepSelect[index+1].parentElement.parentElement.parentElement.classList.add("open")
-                // stepSelect[index].parentElement.parentElement.parentElement.setAttribute("open","false") 
-            }
             
             if (completed==5){
                 progress.style.borderTopRightRadius="5px"
                 progress.style.borderBottomRightRadius="5px"
             } 
+
+            completionStatement.innerText= `${completed}/5 completed`
+            progress.style.width=`${(completed/5)*100}%`
+
+            /* change svg pic */
+            selection.innerHTML = `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" fill="#303030"></circle>
+        <path
+          d="M17.2738 8.52629C17.6643 8.91682 17.6643 9.54998 17.2738 9.94051L11.4405 15.7738C11.05 16.1644 10.4168 16.1644 10.0263 15.7738L7.3596 13.1072C6.96908 12.7166 6.96908 12.0835 7.3596 11.693C7.75013 11.3024 8.38329 11.3024 8.77382 11.693L10.7334 13.6525L15.8596 8.52629C16.2501 8.13577 16.8833 8.13577 17.2738 8.52629Z"
+          fill="#fff"
+        ></path>
+      </svg>`
+
+      selection.setAttribute("aria-checked", "true")
+        }
+        else{
+            
+            completed-=1
             
             completionStatement.innerText= `${completed}/5 completed`
             progress.style.width=`${(completed/5)*100}%`
-            
-            /* change svg pic */
-            selection.innerHTML = `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="10" fill="#303030"></circle>
-        <path
-        d="M17.2738 8.52629C17.6643 8.91682 17.6643 9.54998 17.2738 9.94051L11.4405 15.7738C11.05 16.1644 10.4168 16.1644 10.0263 15.7738L7.3596 13.1072C6.96908 12.7166 6.96908 12.0835 7.3596 11.693C7.75013 11.3024 8.38329 11.3024 8.77382 11.693L10.7334 13.6525L15.8596 8.52629C16.2501 8.13577 16.8833 8.13577 17.2738 8.52629Z"
-        fill="#fff"
-        ></path>
-        </svg>`
-        
-        selection.setAttribute("aria-checked", "true")
-    }
-    else{
-        
-        completed-=1
-        
-        completionStatement.innerText= `${completed}/5 completed`
-        progress.style.width=`${(completed/5)*100}%`
-        progress.style.borderTopRightRadius="0px"
-        progress.style.borderBottomRightRadius="0px"
-        selection.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" class="step-select">
-        <circle cx="16" cy="16" r="12" stroke="#8A8A8A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 6" />
-        </svg>`
-        
-        selection.setAttribute("aria-checked",'false')
-    }
-    
+            progress.style.borderTopRightRadius="0px"
+            progress.style.borderBottomRightRadius="0px"
+            selection.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" class="step-select">
+            <circle cx="16" cy="16" r="12" stroke="#8A8A8A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 6" />
+          </svg>`
+
+          selection.setAttribute("aria-checked", "false")
+        }
         
     })
 
