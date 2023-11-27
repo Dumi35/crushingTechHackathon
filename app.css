@@ -275,8 +275,6 @@ nav{
     padding-inline: 10px;
 }
 
-
-
 .dropdown a:focus{
     border: 2px solid var(--focused-clr);
 }
@@ -301,14 +299,25 @@ main{
     padding: var(--primary-padding);
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    position: relative;
+    align-items: start;
+    gap: 0.5rem;
 }
 
 .extend p{
     font: var(--font-md-med);
+}
+
+.extend-content{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.dismiss{
+    background-color: transparent;
+    border: none;
 }
 
 .controls{
@@ -333,7 +342,6 @@ main{
     padding: 7px;
     text-decoration: none;
     color: #323232;
-    margin-right: 20px;
     box-shadow: 
     inset 0px -1px 0px 0px #b5b5b5;
     font: var(--font-sm-sb);
@@ -532,6 +540,7 @@ main{
 
 details summary{
     list-style: none;  
+    list-style-type: none;
 }
 
 
