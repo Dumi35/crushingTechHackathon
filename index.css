@@ -421,7 +421,6 @@ main{
     margin-block: 20px;
 }
 
-
 .steps{
     align-items: start;
     padding: 0px;
@@ -429,7 +428,7 @@ main{
     cursor: pointer;
 }
 
-.open{
+.steps div [open]{
     background: var(--bg-background);
     border-radius: 10px;
 }
@@ -438,27 +437,20 @@ main{
     padding: 8px 8px 12px 0px;
 }
 
-.single-step{
-    display: flex;
-}
-details{
-    width: 100%;
-}
-
 .step-description{
     display: flex;
     justify-content: space-between;
     align-items: start;
     font: var(--font-md-med);
     color: var(--font-clr-mid);
-    margin-top: 10px;
 }
 
 .step-text{
     display: flex;
     flex-grow: 1;
+    /* flex-basis: 600px; */
     flex-direction: column;
-    /* margin-inline: 32px; */
+    margin-inline: 32px;
     max-width: 600px;
     gap: 1rem;
     
@@ -525,7 +517,7 @@ details{
 
 .step-image{
     display: none; 
-    margin-top: -20px;
+    margin-top: -40px;
 } 
 
 .step-image img{
@@ -543,14 +535,15 @@ details summary{
     vertical-align: middle;
     background-color: transparent;
     border: none;
-    margin-top: 4px;
-    margin-right: 5px;
 }
 
 .summary-heading{
     font: var(--font-md-med);
 }
 
+details[open] .summary-heading{
+    font: var(--font-md-sb);
+}
 
 @media screen and (min-width:600px) {
     .alert,.dropdown{
