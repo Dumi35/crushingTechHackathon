@@ -529,7 +529,7 @@ main{
 
 .step-image{
     display: none; 
-    margin-top: -40px;
+    margin-top: -30px;
 } 
 
 .step-image img{
@@ -541,6 +541,7 @@ main{
 details summary{
     list-style: none;  
     list-style-type: none;
+    display: block; 
 }
 
 
