@@ -98,8 +98,7 @@ nav{
     background: var(--grey-200);
     border-radius: 10px;
     padding: 0.5rem;
-    border: 1px solid var(--grey-100);  
-    
+    border: 1px solid var(--grey-100);   
 }
 
 .searchBar:focus-within{
@@ -542,6 +541,10 @@ details summary{
     list-style: none;  
     list-style-type: none;
     display: block; 
+}
+
+summary::-webkit-details-marker {
+    display: none
 }
 
 
